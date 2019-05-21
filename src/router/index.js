@@ -54,6 +54,28 @@ export const constantRoutes = [
       meta: { title: 'Dashboard', icon: 'dashboard' }
     }]
   },
+  /* 客户管理 */
+  {
+    path: '/customerManagement',
+    component: Layout,
+    redirect: '/customerManagement/myCustomer',
+    name: 'CustomerManagement',
+    meta: { title: '客户管理', icon: 'menu' },
+    children: [
+      {
+        path: 'myCustomer',
+        name: 'MyCustomer',
+        component: () => import('@/views/customerManagement/myCustomer/index'), // Parent router-view
+        meta: { title: '我的客户', icon: 'my-customer' }
+      },
+      {
+        path: 'resourceLibrary',
+        name: 'ResourceLibrary',
+        component: () => import('@/views/customerManagement/resourceLibrary/index'),
+        meta: { title: '资源库', icon: 'resource' }
+      }
+    ]
+  },
 
   {
     path: '/example',
@@ -155,19 +177,6 @@ export const constantRoutes = [
       {
         path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
         meta: { title: 'External Link', icon: 'link' }
-      }
-    ]
-  },
-
-  {
-    path: '/icon',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/icons/index'),
-        name: 'Icons',
-        meta: { title: 'Icons', icon: 'icon', noCache: true }
       }
     ]
   },
