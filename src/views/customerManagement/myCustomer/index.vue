@@ -31,6 +31,36 @@
       <el-tab-pane label="录入客户" name="seventh">
       </el-tab-pane>
       <el-tab-pane label="成单客户" name="eighth">
+        <!--Form-->
+        <el-form :inline="true" :model="formInline" class="demo-form-inline">
+          <el-form-item>
+            <el-select v-model="formInline.region" placeholder="请选择搜索条件">
+              <el-option label="公司名称" value="companyName"></el-option>
+              <el-option label="联系人手机号" value="latentUserMobile"></el-option>
+              <el-option label="联系人座机号" value="latentTelephone"></el-option>
+              <el-option label="联系人姓名" value="latentNickName"></el-option>
+              <el-option label="用户ID" value="latentUserId"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item>
+            <el-input v-model="formInline.user" placeholder="请输入搜索内容"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-date-picker
+              v-model="value1"
+              type="daterange"
+              range-separator="至"
+              start-placeholder="开始日期"
+              end-placeholder="结束日期"
+              value-format="yyyy-MM-dd">
+            </el-date-picker>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="onSubmit">查询</el-button>
+          </el-form-item>
+        </el-form>
+
+        <!-- Table -->
         <el-table
           v-loading="listLoading"
           :data="tableData2"
@@ -101,6 +131,11 @@ export default {
   name: 'Icons',
   data() {
     return {
+      formInline: {
+        user: '',
+        region: ''
+      },
+      value1: '',
       list: null,
       listLoading: true,
       activeTabsName: 'eighth',
@@ -168,6 +203,9 @@ export default {
     this.fetchData()
   },
   methods: {
+    onSubmit() {
+      this.$message('submit!')
+    },
     handleSelectionChange(val) {
       console.log(val)
     },
@@ -185,8 +223,12 @@ export default {
   }
 }
 </script>
+
 <style lang="scss" scoped>
 .my-customer{
+  .line{
+    text-align: center;
+  }
   .el-table{
     .svg-icon{
       cursor: pointer;
