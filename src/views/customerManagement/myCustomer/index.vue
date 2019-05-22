@@ -32,9 +32,10 @@
       </el-tab-pane>
       <el-tab-pane label="成单客户" name="eighth">
         <!--Form-->
-        <el-form :inline="true" :model="formInline" class="demo-form-inline">
+        <el-form :inline="true" :model="formInline">
+          <!-- 选择搜索条件 -->
           <el-form-item>
-            <el-select v-model="formInline.region" placeholder="请选择搜索条件">
+            <el-select v-model="formInline.region" clearable placeholder="请选择搜索条件">
               <el-option label="公司名称" value="companyName"></el-option>
               <el-option label="联系人手机号" value="latentUserMobile"></el-option>
               <el-option label="联系人座机号" value="latentTelephone"></el-option>
@@ -42,24 +43,92 @@
               <el-option label="用户ID" value="latentUserId"></el-option>
             </el-select>
           </el-form-item>
+          <!-- 输对应搜索条件的内容 -->
           <el-form-item>
             <el-input v-model="formInline.user" placeholder="请输入搜索内容"></el-input>
           </el-form-item>
+          <!-- 下次跟进时间 -->
           <el-form-item>
             <el-date-picker
               v-model="value1"
               type="daterange"
               range-separator="至"
-              start-placeholder="开始日期"
-              end-placeholder="结束日期"
-              value-format="yyyy-MM-dd">
+              start-placeholder="计划下次开始跟进时间"
+              end-placeholder="计划下次结束跟进时间"
+              format="yyyy-MM-dd HH-mm-ss"
+              value-format="yyyy-MM-dd HH-mm-ss"
+              :default-time="['00:00:00', '23:59:59']">
             </el-date-picker>
+            <!--<div class="demonstration">值：{{ value1 }}</div>-->
           </el-form-item>
+          <!-- 跟进时间 -->
           <el-form-item>
-            <el-button type="primary" @click="onSubmit">查询</el-button>
+            <el-date-picker
+              v-model="value2"
+              type="daterange"
+              range-separator="至"
+              start-placeholder="开始跟进时间"
+              end-placeholder="结束跟进时间"
+              format="yyyy-MM-dd HH-mm-ss"
+              value-format="yyyy-MM-dd HH-mm-ss"
+              :default-time="['00:00:00', '23:59:59']">
+            </el-date-picker>
+            <!--<div class="demonstration">值：{{ value2 }}</div>-->
+          </el-form-item>
+          <!-- 产品类型 -->
+          <el-form-item>
+            <el-select v-model="formInline.region1" clearable placeholder="请选择产品类型">
+              <el-option label="接口返回数据" value="productType"></el-option>
+            </el-select>
+          </el-form-item>
+          <!-- 产品小类 -->
+          <el-form-item>
+            <el-select v-model="formInline.region2" clearable placeholder="请选择产品小类">
+              <el-option label="接口返回数据" value="productSubcategory"></el-option>
+            </el-select>
+          </el-form-item>
+          <!-- 客户标签 -->
+          <el-form-item>
+            <el-select v-model="formInline.region3" clearable placeholder="请选择客户标签">
+              <el-option label="新客户" value="newCustomer"></el-option>
+              <el-option label="渠道客户" value="channelCustomer"></el-option>
+            </el-select>
+          </el-form-item>
+          <!-- 意向度 -->
+          <el-form-item>
+            <el-select v-model="formInline.region4" clearable placeholder="请选择意向度">
+              <el-option label="无意向" value="1"></el-option>
+              <el-option label="有意向" value="2"></el-option>
+              <el-option label="高意向" value="3"></el-option>
+            </el-select>
+          </el-form-item>
+          <!-- 客户价值 -->
+          <el-form-item>
+            <el-select v-model="formInline.region4" clearable placeholder="请选择客户价值">
+              <el-option label="高价值" value="1"></el-option>
+              <el-option label="中价值" value="2"></el-option>
+              <el-option label="低价值" value="3"></el-option>
+            </el-select>
+          </el-form-item>
+          <!-- 公司所在地 -->
+          <el-form-item>
+            <el-input v-model="formInline.user1" placeholder="请输入公司所在地"></el-input>
+          </el-form-item>
+          <!-- 查询公司范围 -->
+          <el-form-item>
+            <el-select v-model="formInline.region5" clearable placeholder="请选择查询公司范围">
+              <el-option label="全部公司" value="1"></el-option>
+              <el-option label="主显公司" value="1"></el-option>
+              <el-option label="从显公司" value="2"></el-option>
+            </el-select>
+          </el-form-item>
+          <!-- 操作 -->
+          <el-form-item>
+            <el-button type="primary" @click="onSubmit">搜索</el-button>
+            <el-button type="primary" @click="onSubmit">重置</el-button>
+            <el-button type="success" @click="onSubmit">创建客户</el-button>
           </el-form-item>
         </el-form>
-
         <!-- Table -->
         <el-table
           v-loading="listLoading"
@@ -84,7 +153,7 @@
               </el-tooltip>
             </template>
           </el-table-column>
-          <el-table-column label="联系人姓名" width="210" class-name="user-info" header-align="center">
+          <el-table-column label="联系人姓名" width="190" class-name="user-info" header-align="center">
             <template slot-scope="scope">
               <span class="user-name">姓名: {{scope.row.userInfo.userName}}</span>
               <span class="user-phone">电话: {{scope.row.userInfo.phone}}</span>
@@ -115,8 +184,7 @@
           <el-table-column prop="FinalPaymentTime" label="最后付费时间" sortable width="130" align="center"></el-table-column>
           <el-table-column label="操作" align="center" class-name="operation" fixed="right" width="190">
             <el-button type="primary" size="small">跟进</el-button>
-            <!--<el-button type="primary">待客下单</el-button>-->
-            <el-button type="primary" size="small">查看订单</el-button>
+            <el-button type="primary" size="small">待客下单</el-button>
           </el-table-column>
         </el-table>
       </el-tab-pane>
@@ -136,6 +204,7 @@ export default {
         region: ''
       },
       value1: '',
+      value2: '',
       list: null,
       listLoading: true,
       activeTabsName: 'eighth',
@@ -226,8 +295,29 @@ export default {
 
 <style lang="scss" scoped>
 .my-customer{
-  .line{
-    text-align: center;
+  .el-form{
+    .el-date-editor {
+      width: 410px;
+      /deep/ .el-range-input{
+        width: 80%;
+      }
+      /deep/ .el-range-separator{  // 加 /deep/ 或 >>> 是为了给 element 元素添加自定义样式
+        padding: 0;
+      }
+    }
+    .el-button{
+      padding: 11px 15px;
+      margin-left: 20px;
+      &:first-child{
+        margin-left: 10px;
+      }
+      &:last-child{
+        margin-left: 40px;
+      }
+      /deep/ span{
+        font-size: 16px;
+      }
+    }
   }
   .el-table{
     .svg-icon{
@@ -257,21 +347,20 @@ export default {
       }
     }
     .tags{
-    .el-tag{
-      margin-right: 5px;
-      font-size: 14px;
-      height: 30px;
-      line-height: 28px;
-      padding: 0 8px;
+      .el-tag{
+        margin-right: 5px;
+        font-size: 14px;
+        height: 30px;
+        line-height: 28px;
+        padding: 0 8px;
+      }
+      .el-tag:last-child{
+        margin-right: 0;
+      }
     }
-    .el-tag:last-child{
-      margin-right: 0;
-    }
-  }
     .operation{
       .el-button{
-        font-size: 15px;
-        /*padding: 10px 12px;*/
+        font-size: 14px;
       }
     }
   }
