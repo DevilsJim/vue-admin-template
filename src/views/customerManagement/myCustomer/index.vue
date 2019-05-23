@@ -184,7 +184,7 @@
           <el-table-column prop="FinalPaymentTime" label="最后付费时间" sortable width="130" align="center"></el-table-column>
           <el-table-column label="操作" align="center" class-name="operation" fixed="right" width="190">
             <el-button type="primary" size="small" @click="handleFollowUp">跟进</el-button>
-            <el-button type="primary" size="small">待客下单</el-button>
+            <el-button type="primary" size="small" @click="handleValetOrder">待客下单</el-button>
           </el-table-column>
         </el-table>
         <!-- 分页 -->
@@ -201,10 +201,13 @@
     </el-tabs>
 
     <!-- 创建客户 -->
-    <created-customer-dialog :createdDialogVisible.sync="createdDialogVisible"></created-customer-dialog>
+    <created-customer-dialog :visible.sync="createdDialogVisible"></created-customer-dialog>
 
     <!-- 跟进 -->
-    <follow-up-dialog :followUpDialogVisible.sync="followUpDialogVisible"></follow-up-dialog>
+    <follow-up-dialog :visible.sync="followUpDialogVisible"></follow-up-dialog>
+
+    <!-- 代客下单 -->
+    <valet-Order-dialog :visible.sync="valetOrderDialogVisible"></valet-Order-dialog>
   </div>
 </template>
 
@@ -212,10 +215,11 @@
 // import { getList } from '@/api/table'
 import CreatedCustomerDialog from './components/CreatedCustomerDialog'
 import FollowUpDialog from './components/FollowUpDialog'
+import ValetOrderDialog from './components/ValetOrderDialog'
 
 export default {
   name: 'MyCustomer',
-  components: { CreatedCustomerDialog, FollowUpDialog },
+  components: { CreatedCustomerDialog, FollowUpDialog, ValetOrderDialog },
   data() {
     return {
       formInline: {},
@@ -284,7 +288,8 @@ export default {
       ],
       currentPage4: 4,
       createdDialogVisible: false,
-      followUpDialogVisible: false
+      followUpDialogVisible: false,
+      valetOrderDialogVisible: false
     }
   },
   created() {
@@ -319,6 +324,9 @@ export default {
     },
     handleFollowUp() {
       this.followUpDialogVisible = true
+    },
+    handleValetOrder() {
+      this.valetOrderDialogVisible = true
     }
   }
 }

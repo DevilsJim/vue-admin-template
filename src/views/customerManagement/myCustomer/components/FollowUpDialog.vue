@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="跟进" :visible.sync="followUpDialogVisible" width="650px">
+  <el-dialog title="跟进" :visible.sync="visible" width="650px">
     <el-form ref="dataForm" :rules="rules" :model="temp" label-width="120px">
       <!-- 客户类型 -->
       <el-form-item label="跟进联系人:">
@@ -90,8 +90,8 @@
     </el-form>
     <!-- 保存, 取消 -->
     <div slot="footer" class="dialog-footer">
-      <el-button type="primary" @click="dialogStatus==='create'?createData():updateData()">保存</el-button>
       <el-button @click="createdDialogVisible = false">取消</el-button>
+      <el-button type="primary" @click="dialogStatus==='create'?createData():updateData()">保存</el-button>
     </div>
   </el-dialog>
 </template>
@@ -100,7 +100,7 @@
 export default {
   name: 'FollowUpDialog',
   props: {
-    followUpDialogVisible: {
+    visible: {
       type: Boolean,
       default: false
     }
@@ -152,9 +152,6 @@ export default {
 </script>
 
 <style scoped>
-.el-row{
-  padding: 0 20px;
-}
 /deep/ .el-dialog .el-dialog__header{
   border-bottom: 1px solid #ddd;
   padding-bottom: 20px;

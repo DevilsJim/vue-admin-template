@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="新增客户" :visible.sync="createdDialogVisible" width="650px">
+  <el-dialog title="新增客户" :visible.sync="visible" width="650px">
     <el-form ref="dataForm" :rules="rules" :model="temp" label-width="75px" size="medium">
       <!-- 客户类型 -->
       <el-form-item label="客户类型" prop="customerType" class="label-style" label-width="80px">
@@ -176,8 +176,8 @@
     </el-form>
     <!-- 保存, 取消 -->
     <div slot="footer" class="dialog-footer">
-      <el-button type="primary" @click="dialogStatus==='create'?createData():updateData()">保存</el-button>
       <el-button @click="createdDialogVisible = false">取消</el-button>
+      <el-button type="primary" @click="dialogStatus==='create'?createData():updateData()">保存</el-button>
     </div>
   </el-dialog>
 </template>
@@ -186,7 +186,7 @@
 export default {
   name: 'CreateCustomerDialog',
   props: {
-    createdDialogVisible: {
+    visible: {
       type: Boolean,
       default: false
     }
