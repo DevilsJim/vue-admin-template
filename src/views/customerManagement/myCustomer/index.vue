@@ -126,7 +126,7 @@
           <el-form-item>
             <el-button type="primary" @click="onSubmit">搜索</el-button>
             <el-button type="primary" @click="onSubmit">重置</el-button>
-            <el-button type="success" icon="el-icon-edit" @click="handleCreate">创建客户</el-button>
+            <el-button type="success" icon="el-icon-edit" @click="handleCreatedCustomer">创建客户</el-button>
           </el-form-item>
         </el-form>
         <!-- 列表 -->
@@ -184,7 +184,7 @@
           <el-table-column prop="FinalPaymentTime" label="最后付费时间" sortable width="130" align="center"></el-table-column>
           <el-table-column label="操作" align="center" class-name="operation" fixed="right" width="190">
             <el-button type="primary" size="small" @click="handleFollowUp">跟进</el-button>
-            <el-button type="primary" size="small" @click="handleValetOrder">待客下单</el-button>
+            <el-button type="primary" size="small" @click="handleChooseOrderWay">待客下单</el-button>
           </el-table-column>
         </el-table>
         <!-- 分页 -->
@@ -201,13 +201,16 @@
     </el-tabs>
 
     <!-- 创建客户 -->
-    <created-customer-dialog :visible.sync="createdDialogVisible"></created-customer-dialog>
+    <created-customer-dialog :visible.sync="createdCustomerVisible"></created-customer-dialog>
 
     <!-- 跟进 -->
-    <follow-up-dialog :visible.sync="followUpDialogVisible"></follow-up-dialog>
+    <follow-up-dialog :visible.sync="followUpVisible"></follow-up-dialog>
 
     <!-- 代客下单 -->
-    <valet-Order-dialog :visible.sync="valetOrderDialogVisible"></valet-Order-dialog>
+    <!--<valet-Order-dialog :visible.sync="chooseOrderWayVisible"></valet-Order-dialog>-->
+
+    <!-- 代客下单 -->
+    <choose-order-way-dialog :visible.sync="chooseOrderWayVisible"></choose-order-way-dialog>
   </div>
 </template>
 
@@ -215,11 +218,17 @@
 // import { getList } from '@/api/table'
 import CreatedCustomerDialog from './components/CreatedCustomerDialog'
 import FollowUpDialog from './components/FollowUpDialog'
-import ValetOrderDialog from './components/ValetOrderDialog'
+import ChooseOrderWayDialog from './components/ChooseOrderWayDialog'
+// import ValetOrderDialog from './components/ValetOrderDialog'
 
 export default {
   name: 'MyCustomer',
-  components: { CreatedCustomerDialog, FollowUpDialog, ValetOrderDialog },
+  components: {
+    CreatedCustomerDialog,
+    FollowUpDialog,
+    ChooseOrderWayDialog
+    // ValetOrderDialog
+  },
   data() {
     return {
       formInline: {},
@@ -287,9 +296,10 @@ export default {
         }
       ],
       currentPage4: 4,
-      createdDialogVisible: false,
-      followUpDialogVisible: false,
-      valetOrderDialogVisible: false
+      createdCustomerVisible: false,
+      followUpVisible: false,
+      chooseOrderWayVisible: false,
+      valetOrderVisible: false
     }
   },
   created() {
@@ -319,14 +329,17 @@ export default {
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`)
     },
-    handleCreate() {
-      this.createdDialogVisible = true
+    handleCreatedCustomer() {
+      this.createdCustomerVisible = true
     },
     handleFollowUp() {
-      this.followUpDialogVisible = true
+      this.followUpVisible = true
+    },
+    handleChooseOrderWay() {
+      this.chooseOrderWayVisible = true
     },
     handleValetOrder() {
-      this.valetOrderDialogVisible = true
+      this.valetOrderVisible = true
     }
   }
 }
