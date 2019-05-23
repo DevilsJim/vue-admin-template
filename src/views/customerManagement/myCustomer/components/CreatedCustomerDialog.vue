@@ -11,7 +11,7 @@
       </el-form-item>
 
       <!-- 客户信息 -->
-      <el-form-item label="客户信息" class="label-style" label-width="80px" label-position="right"></el-form-item>
+      <el-form-item label="客户信息" class="label-style" label-width="80px"></el-form-item>
       <!-- 公司名称, 意向业务 -->
       <el-row>
         <el-col :span="12" style="padding-right: 15px;">
@@ -45,7 +45,7 @@
       <!-- 地址, 线索来源 -->
       <el-row>
         <el-col :span="12" style="padding-right: 15px;">
-          <el-form-item label="地址:" label-position="right">
+          <el-form-item label="地址:">
             <el-input v-model="temp.user" placeholder="请输入地址"></el-input>
           </el-form-item>
         </el-col>
@@ -88,7 +88,7 @@
       </el-row>
 
       <!-- 联系人信息 -->
-      <el-form-item label="联系人信息" class="label-style" label-width="100px" label-position="right"></el-form-item>
+      <el-form-item label="联系人信息" class="label-style" label-width="100px"></el-form-item>
       <!-- 姓名, 手机 -->
       <el-row>
         <el-col :span="12" style="padding-right: 15px;">
@@ -118,7 +118,7 @@
       <!-- 微信, 邮箱 -->
       <el-row>
         <el-col :span="12" style="padding-right: 15px;">
-          <el-form-item label="微信:" label-position="right">
+          <el-form-item label="微信:">
             <el-input v-model="temp.user" placeholder="请输入微信号"></el-input>
           </el-form-item>
         </el-col>
@@ -138,7 +138,7 @@
       </el-row>
 
       <!-- 经营情况 -->
-      <el-form-item label="经营情况" class="label-style" label-width="80px" label-position="right"></el-form-item>
+      <el-form-item label="经营情况" class="label-style" label-width="80px"></el-form-item>
       <!-- 商标数量, 专利数量 -->
       <el-row>
         <el-col :span="12" style="padding-right: 15px;">

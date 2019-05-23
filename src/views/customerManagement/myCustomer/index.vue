@@ -183,7 +183,7 @@
           <el-table-column prop="FirstPaymentTime" label="首次付费时间" sortable width="130" align="center"></el-table-column>
           <el-table-column prop="FinalPaymentTime" label="最后付费时间" sortable width="130" align="center"></el-table-column>
           <el-table-column label="操作" align="center" class-name="operation" fixed="right" width="190">
-            <el-button type="primary" size="small">跟进</el-button>
+            <el-button type="primary" size="small" @click="handleFollowUp">跟进</el-button>
             <el-button type="primary" size="small">待客下单</el-button>
           </el-table-column>
         </el-table>
@@ -202,22 +202,23 @@
 
     <!-- 创建客户 -->
     <created-customer-dialog :createdDialogVisible.sync="createdDialogVisible"></created-customer-dialog>
+
+    <!-- 跟进 -->
+    <follow-up-dialog :followUpDialogVisible.sync="followUpDialogVisible"></follow-up-dialog>
   </div>
 </template>
 
 <script>
 // import { getList } from '@/api/table'
 import CreatedCustomerDialog from './components/CreatedCustomerDialog'
+import FollowUpDialog from './components/FollowUpDialog'
 
 export default {
   name: 'MyCustomer',
-  components: { CreatedCustomerDialog },
+  components: { CreatedCustomerDialog, FollowUpDialog },
   data() {
     return {
-      formInline: {
-        user: '',
-        region: ''
-      },
+      formInline: {},
       value1: '',
       value2: '',
       list: null,
@@ -282,7 +283,8 @@ export default {
         }
       ],
       currentPage4: 4,
-      createdDialogVisible: false
+      createdDialogVisible: false,
+      followUpDialogVisible: false
     }
   },
   created() {
@@ -314,6 +316,9 @@ export default {
     },
     handleCreate() {
       this.createdDialogVisible = true
+    },
+    handleFollowUp() {
+      this.followUpDialogVisible = true
     }
   }
 }
@@ -324,11 +329,8 @@ export default {
   .el-form{
     .el-date-editor {
       width: 410px;
-      /deep/ .el-range-input{
+      /deep/ .el-range-input{ // 加 /deep/ 或 >>> 是为了给 element 元素添加自定义样式
         width: 80%;
-      }
-      /deep/ .el-range-separator{  // 加 /deep/ 或 >>> 是为了给 element 元素添加自定义样式
-        padding: 0;
       }
     }
     .el-button{
