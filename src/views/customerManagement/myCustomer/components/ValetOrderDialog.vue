@@ -1,6 +1,6 @@
 <template>
   <el-dialog title="选择下单方式" :visible.sync="visible" width="650px">
-    <el-form ref="dataForm" :rules="rules" :model="temp" label-width="120px">
+    <el-form ref="dataForm" :model="temp" label-width="120px">
       <!-- 合同类型 -->
       <el-form-item label="合同类型:">
         <el-radio v-model="temp.radio1" label="1">标准合同</el-radio>

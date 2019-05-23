@@ -1,6 +1,6 @@
 <template>
   <el-dialog title="跟进" :visible.sync="visible" width="650px">
-    <el-form ref="dataForm" :rules="rules" :model="temp" label-width="120px">
+    <el-form ref="dataForm" :model="temp" label-width="120px">
       <!-- 客户类型 -->
       <el-form-item label="跟进联系人:">
         <el-input v-model="temp.user" placeholder="请输入跟进联系人" clearable></el-input>
@@ -107,7 +107,6 @@ export default {
   },
   data() {
     return {
-      rules: {},
       temp: {},
       options: [
         {
