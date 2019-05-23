@@ -12,8 +12,8 @@
 
       <!-- 客户信息 -->
       <el-form-item label="客户信息" class="label-style" label-width="80px" label-position="right"></el-form-item>
+      <!-- 公司名称, 意向业务 -->
       <el-row>
-        <!-- 公司名称, 意向业务 -->
         <el-col :span="12" style="padding-right: 15px;">
           <el-form-item label="公司名称:">
             <el-input v-model="temp.user" placeholder="请输入公司名称"></el-input>
@@ -29,8 +29,8 @@
           </el-form-item>
         </el-col>
       </el-row>
+      <!-- 行业领域, 人员规模 -->
       <el-row>
-        <!-- 行业领域, 人员规模 -->
         <el-col :span="12" style="padding-right: 15px;">
           <el-form-item label="行业领域:">
             <el-input v-model="temp.user" placeholder="请输入行业领域"></el-input>
@@ -42,8 +42,8 @@
           </el-form-item>
         </el-col>
       </el-row>
+      <!-- 地址, 线索来源 -->
       <el-row>
-        <!-- 地址, 线索来源 -->
         <el-col :span="12" style="padding-right: 15px;">
           <el-form-item label="地址:" label-position="right">
             <el-input v-model="temp.user" placeholder="请输入地址"></el-input>
@@ -59,8 +59,8 @@
           </el-form-item>
         </el-col>
       </el-row>
+      <!-- 渠道用户, 客户星级 -->
       <el-row>
-        <!-- 渠道用户, 客户星级 -->
         <el-col :span="12" style="padding-right: 15px;">
           <el-form-item label="渠道用户:">
             <el-radio-group v-model="temp.radio">
@@ -78,8 +78,8 @@
             </el-select>
           </el-form-item></el-col>
       </el-row>
+      <!-- 备注 -->
       <el-row>
-        <!-- 备注 -->
         <el-col :span="24">
           <el-form-item label="备注:">
             <el-input type="textarea" v-model="temp.desc" placeholder="请输入内容"></el-input>
@@ -89,8 +89,8 @@
 
       <!-- 联系人信息 -->
       <el-form-item label="联系人信息" class="label-style" label-width="100px" label-position="right"></el-form-item>
+      <!-- 姓名, 手机 -->
       <el-row>
-        <!-- 姓名, 手机 -->
         <el-col :span="12" style="padding-right: 15px;">
           <el-form-item label="姓名:">
             <el-input v-model="temp.user" placeholder="请输入客户姓名"></el-input>
@@ -102,8 +102,8 @@
           </el-form-item>
         </el-col>
       </el-row>
+      <!-- 职务, 座机 -->
       <el-row>
-        <!-- 职务, 座机 -->
         <el-col :span="12" style="padding-right: 15px;">
           <el-form-item label="职务:">
             <el-input v-model="temp.user" placeholder="请输入职务"></el-input>
@@ -115,8 +115,8 @@
           </el-form-item>
         </el-col>
       </el-row>
+      <!-- 微信, 邮箱 -->
       <el-row>
-        <!-- 微信, 邮箱 -->
         <el-col :span="12" style="padding-right: 15px;">
           <el-form-item label="微信:" label-position="right">
             <el-input v-model="temp.user" placeholder="请输入微信号"></el-input>
@@ -128,8 +128,8 @@
           </el-form-item>
         </el-col>
       </el-row>
+      <!-- QQ -->
       <el-row>
-        <!-- QQ -->
         <el-col :span="12" style="padding-right: 15px;">
           <el-form-item label="QQ:">
             <el-input v-model="temp.user" placeholder="请输入邮箱地址"></el-input>
@@ -139,8 +139,8 @@
 
       <!-- 经营情况 -->
       <el-form-item label="经营情况" class="label-style" label-width="80px" label-position="right"></el-form-item>
+      <!-- 商标数量, 专利数量 -->
       <el-row>
-        <!-- 商标数量, 专利数量 -->
         <el-col :span="12" style="padding-right: 15px;">
           <el-form-item label="商标数量:">
             <el-input v-model="temp.user" placeholder="请输入商标数量"></el-input>
@@ -152,8 +152,8 @@
           </el-form-item>
         </el-col>
       </el-row>
+      <!-- 软著数量, 其他资质 -->
       <el-row>
-        <!-- 软著数量, 其他资质 -->
         <el-col :span="12" style="padding-right: 15px;">
           <el-form-item label="软著数量:">
             <el-input v-model="temp.user" placeholder="请输入软著数量"></el-input>
@@ -165,8 +165,8 @@
           </el-form-item>
         </el-col>
       </el-row>
+      <!-- 融资情况 -->
       <el-row>
-        <!-- 融资情况 -->
         <el-col :span="12" style="padding-right: 15px;">
           <el-form-item label="融资情况:">
             <el-input v-model="temp.user" placeholder="请输入融资情况"></el-input>
@@ -174,6 +174,7 @@
         </el-col>
       </el-row>
     </el-form>
+    <!-- 保存, 取消 -->
     <div slot="footer" class="dialog-footer">
       <el-button type="primary" @click="dialogStatus==='create'?createData():updateData()">保存</el-button>
       <el-button @click="createdDialogVisible = false">取消</el-button>
@@ -192,20 +193,8 @@ export default {
   },
   data() {
     return {
-      rules: {
-        type: [{ required: true, message: 'type is required', trigger: 'change' }],
-        timestamp: [{ type: 'date', required: true, message: 'timestamp is required', trigger: 'change' }],
-        title: [{ required: true, message: 'title is required', trigger: 'blur' }]
-      },
-      temp: {
-        id: undefined,
-        importance: 1,
-        remark: '',
-        timestamp: new Date(),
-        title: '',
-        type: '',
-        status: 'published'
-      }
+      rules: {},
+      temp: {}
     }
   }
 }
