@@ -63,3 +63,12 @@ div:focus {
 .app-container {
   padding: 20px;
 }
+
+/*选择器宽度自适应*/
+.el-select {
+  width: 100%;
+}
+/*级联选择器宽度自适应*/
+.el-cascader{
+  width: 100%;
+}

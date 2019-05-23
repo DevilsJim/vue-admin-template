@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container my-customer">
+  <div class="app-container customer-detail">
     <!-- 内容 -->
     <el-tabs type="border-card" v-model="activeTabsName">
       <el-tab-pane label="全部客户" name="first">
@@ -218,10 +218,7 @@
 
 <script>
 // import { getList } from '@/api/table'
-import CreatedCustomerDialog from './components/CreatedCustomerDialog'
-import FollowUpDialog from './components/FollowUpDialog'
-import ChooseOrderWayDialog from './components/ChooseOrderWayDialog'
-// import { CreatedCustomerDialog, FollowUpDialog, ChooseOrderWayDialog } from './components'
+import { CreatedCustomerDialog, FollowUpDialog, ChooseOrderWayDialog } from './components'
 // import ValetOrderDialog from './components/ValetOrderDialog'
 
 export default {
@@ -349,7 +346,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.my-customer{
+.customer-detail{
   .el-form{
     .el-date-editor {
       width: 410px;

@@ -211,9 +211,6 @@ export default {
 /deep/ .el-form .el-form-item__label, /deep/ .el-form .el-form-item__content, /deep/ .el-form .el-radio{
   font-weight: normal;
 }
-/deep/ .el-form .el-form-item__content .el-select {
-  width: 100%;
-}
 /deep/ .el-form .label-style .el-form-item__label{
   font-size: 16px;
   font-weight: bold;

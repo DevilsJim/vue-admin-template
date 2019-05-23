@@ -162,14 +162,8 @@ export default {
   font-weight: normal;
   font-size: 15px;
 }
-/deep/ .el-form .el-form-item__content .el-select {
-  width: 100%;
-}
 .el-date-editor {
   width: 400px;
-}
-.el-cascader{
-  width: 100%;
 }
 /deep/ .el-date-editor .el-range-input{
   width: 80%;
