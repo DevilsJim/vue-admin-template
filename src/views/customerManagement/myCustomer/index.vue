@@ -31,7 +31,7 @@
       <el-tab-pane label="录入客户" name="seventh">
       </el-tab-pane>
       <el-tab-pane label="成单客户" name="eighth">
-        <!--Form-->
+        <!--搜索-->
         <el-form :inline="true" :model="formInline">
           <!-- 选择搜索条件 -->
           <el-form-item>
@@ -126,10 +126,10 @@
           <el-form-item>
             <el-button type="primary" @click="onSubmit">搜索</el-button>
             <el-button type="primary" @click="onSubmit">重置</el-button>
-            <el-button type="success" @click="onSubmit">创建客户</el-button>
+            <el-button type="success" icon="el-icon-edit" @click="handleCreate">创建客户</el-button>
           </el-form-item>
         </el-form>
-        <!-- Table -->
+        <!-- 列表 -->
         <el-table
           v-loading="listLoading"
           :data="tableData2"
@@ -187,16 +187,31 @@
             <el-button type="primary" size="small">待客下单</el-button>
           </el-table-column>
         </el-table>
+        <!-- 分页 -->
+        <el-pagination
+          background
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="currentPage4"
+          :page-size="10"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="100">
+        </el-pagination>
       </el-tab-pane>
     </el-tabs>
+
+    <!-- 创建客户 -->
+    <created-customer-dialog :createdDialogVisible.sync="createdDialogVisible"></created-customer-dialog>
   </div>
 </template>
 
 <script>
 // import { getList } from '@/api/table'
+import CreatedCustomerDialog from './components/CreatedCustomerDialog'
 
 export default {
-  name: 'Icons',
+  name: 'MyCustomer',
+  components: { CreatedCustomerDialog },
   data() {
     return {
       formInline: {
@@ -265,7 +280,9 @@ export default {
           FirstPaymentTime: '2018-09-18',
           FinalPaymentTime: '2019-05-20'
         }
-      ]
+      ],
+      currentPage4: 4,
+      createdDialogVisible: false
     }
   },
   created() {
@@ -288,6 +305,15 @@ export default {
       //   this.list = response.data.items
       //   this.listLoading = false
       // })
+    },
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`)
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`)
+    },
+    handleCreate() {
+      this.createdDialogVisible = true
     }
   }
 }
@@ -362,6 +388,13 @@ export default {
       .el-button{
         font-size: 14px;
       }
+    }
+  }
+  .el-pagination{
+    text-align: right;
+    margin: 20px 0 1px;
+    /deep/ .el-pager li, /deep/ span, /deep/ span .el-input__inner{
+      font-size: 14px;
     }
   }
 }
